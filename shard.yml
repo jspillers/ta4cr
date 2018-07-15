@@ -1,4 +1,5 @@
 name: ta4cr
+description: Technical analysis library for Crystal
 version: 0.1.0
 
 authors:
