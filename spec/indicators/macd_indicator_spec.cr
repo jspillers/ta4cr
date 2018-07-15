@@ -5,7 +5,6 @@ def macd
 end
 
 describe Ta4cr::Indicators::MacdIndicator do
-
   it "does not average the series value when timeframe as not been met" do
     (0..24).each do |i|
       macd.calculate(i).should eq(macd_series[i])
@@ -21,21 +20,12 @@ end
 
 def macd_series
   [
-    0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,10,9,8 
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 10, 9, 8,
   ].map { |cp| BigDecimal.new(cp) }
 end
 
 def expected_macd_series
   [
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,7,7,5.56,4.3,3.17
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 5.56, 4.3, 3.17,
   ].map { |ss| BigDecimal.new(ss) }
 end
-
-
-
-
-
-
-
-
-

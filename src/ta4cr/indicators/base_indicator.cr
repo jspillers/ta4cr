@@ -1,11 +1,10 @@
 module Ta4cr
   module Indicators
     abstract class BaseIndicator
-
       property series : Proc(Int32, BigDecimal)
 
       def initialize(indicator : BaseIndicator)
-        @calculations = {} of Int32 => BigDecimal 
+        @calculations = {} of Int32 => BigDecimal
         @series = ->(index : Int32) { BigDecimal.new(indicator.get_value(index)) }
       end
 
@@ -30,7 +29,6 @@ module Ta4cr
       end
 
       abstract def calculate(index : Int32)
-
     end
   end
 end

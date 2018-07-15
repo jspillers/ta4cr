@@ -10,7 +10,6 @@ require "./base_indicator"
 module Ta4cr
   module Indicators
     class MacdIndicator < BaseIndicator
-      
       property max_timeframe : Int32
       property short_timeframe : Int32
       property long_timeframe : Int32
@@ -32,4 +31,3 @@ module Ta4cr
     end
   end
 end
-

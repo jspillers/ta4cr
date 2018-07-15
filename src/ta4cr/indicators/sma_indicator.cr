@@ -5,7 +5,6 @@ require "./base_indicator"
 module Ta4cr
   module Indicators
     class SmaIndicator < BaseIndicator
-      
       property timeframe : Int32
 
       def initialize(indicator, timeframe)
@@ -16,7 +15,7 @@ module Ta4cr
       def calculate(index)
         start = calculate_starting_index(index, timeframe)
         return @series.call(index) unless start >= 0
-        get_series_values(start, index).sum / timeframe 
+        get_series_values(start, index).sum / timeframe
       end
     end
   end

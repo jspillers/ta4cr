@@ -10,7 +10,6 @@ require "./base_indicator"
 module Ta4cr
   module Indicators
     class MacdSignalIndicator < BaseIndicator
-      
       def initialize(macd_indicator : MacdIndicator, timeframe = 9)
         super(macd_indicator)
         @signal_ema = EmaIndicator.new(macd_indicator, timeframe)
@@ -22,4 +21,3 @@ module Ta4cr
     end
   end
 end
-

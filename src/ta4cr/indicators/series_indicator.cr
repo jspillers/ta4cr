@@ -5,7 +5,6 @@ require "./base_indicator"
 module Ta4cr
   module Indicators
     class SeriesIndicator < BaseIndicator
-      
       def initialize(series : Array(Number))
         super(series)
       end
@@ -16,4 +15,3 @@ module Ta4cr
     end
   end
 end
-
