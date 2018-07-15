@@ -1,0 +1,9 @@
+name: ta4cr
+version: 0.1.0
+
+authors:
+  - Jrod <jarrod@jtms.net>
+
+crystal: 0.25.0
+
+license: MIT
