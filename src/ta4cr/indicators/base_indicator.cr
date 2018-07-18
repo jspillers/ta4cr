@@ -1,27 +1,37 @@
 module Ta4cr
   module Indicators
     abstract class BaseIndicator
-      property series : Proc(Int32, BigDecimal)
+      @indicator : BaseIndicator | Nil
+      @series : OhlcSeries | Array(BigDecimal) | Nil
+      @calculations = {} of Int32 => BigDecimal | Nil
 
       def initialize(indicator : BaseIndicator)
-        @calculations = {} of Int32 => BigDecimal
-        @series = ->(index : Int32) { BigDecimal.new(indicator.get_value(index)) }
+        @indicator = indicator
       end
 
-      def initialize(series : Array(Number))
-        @calculations = {} of Int32 => BigDecimal
-        @series = ->(index : Int32) { BigDecimal.new(series[index]) }
+      def initialize(series : Array(Float64))
+        @series = series.flat_map {|item| BigDecimal.new(item) }
+      end
+
+      def initialize(series : OhlcSeries)
+        @series = series
       end
 
       def get_series_values(start, stop)
-        (start..stop).flat_map do |i|
-          @series.call(i)
-        end
+        (start..stop).map do |i|
+          val = get_value(i)
+          val && val.is_a?(BigDecimal) ? val : nil
+        end.compact
       end
 
       def get_value(index)
         return @calculations[index] if @calculations[index]?
-        @calculations[index] = BigDecimal.new(calculate(index))
+
+        result = calculate(index)
+
+        if result.is_a?(BigDecimal)
+          @calculations[index] = result
+        end
       end
 
       def calculate_starting_index(index, timeframe)

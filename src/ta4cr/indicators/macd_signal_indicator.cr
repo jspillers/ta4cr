@@ -11,12 +11,11 @@ module Ta4cr
   module Indicators
     class MacdSignalIndicator < BaseIndicator
       def initialize(macd_indicator : MacdIndicator, timeframe = 9)
-        super(macd_indicator)
         @signal_ema = EmaIndicator.new(macd_indicator, timeframe)
       end
 
       def calculate(index)
-        @signal_ema.get_value(index)
+        @signal_ema.get_value(index).as(BigDecimal)
       end
     end
   end

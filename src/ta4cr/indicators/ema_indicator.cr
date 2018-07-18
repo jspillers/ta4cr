@@ -11,8 +11,8 @@ module Ta4cr
     class EmaIndicator < BaseIndicator
       property timeframe : Int32
 
-      def initialize(indicator, timeframe)
-        super(indicator)
+      def initialize(indicator : BaseIndicator, timeframe)
+        @indicator = indicator
         @timeframe = timeframe
         @sma_indicator = SmaIndicator.new(indicator, timeframe)
         @multiplier = BigDecimal.new(2.0 / (timeframe + 1))
@@ -20,15 +20,21 @@ module Ta4cr
 
       def calculate(index)
         start = calculate_starting_index(index, timeframe)
-        return @series.call(index) unless start >= 0
 
-        if start == 0
-          @sma_indicator.get_value(index)
-        else
-          previous_avg = get_value(index - 1)
-          ((@series.call(index) - previous_avg) * @multiplier) + previous_avg
+        if indicator = @indicator
+          return indicator.get_value(index) unless start >= 0
+          
+          return @sma_indicator.get_value(index) if start == 0
+
+          previous_avg = get_value(index - 1).as(BigDecimal)
+          indicator_value = indicator.get_value(index).as(BigDecimal)
+
+          if previous_avg && indicator_value
+            ((indicator_value - previous_avg) * @multiplier) + previous_avg
+          end
         end
       end
+
     end
   end
 end

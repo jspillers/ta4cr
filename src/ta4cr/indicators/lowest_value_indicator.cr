@@ -1,10 +1,9 @@
 require "./base_indicator"
 
-# http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_averages
-
+# returns the lowest value within a given timeframe
 module Ta4cr
   module Indicators
-    class SmaIndicator < BaseIndicator
+    class LowestValueIndicator < BaseIndicator
       property timeframe : Int32
 
       def initialize(indicator : BaseIndicator, timeframe)
@@ -15,12 +14,8 @@ module Ta4cr
       def calculate(index)
         start = calculate_starting_index(index, timeframe)
 
-        if indicator = @indicator 
-          if start >= 0
-            indicator.get_series_values(start, index).sum / timeframe
-          else
-            indicator.get_value(index)
-          end
+        if indicator = @indicator
+          indicator.get_series_values([0, start].max, index).min.as(BigDecimal)
         end
       end
     end

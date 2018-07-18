@@ -14,8 +14,7 @@ module Ta4cr
       property short_timeframe : Int32
       property long_timeframe : Int32
 
-      def initialize(indicator, short_timeframe = 12, long_timeframe = 26)
-        super(indicator)
+      def initialize(indicator : BaseIndicator, short_timeframe = 12, long_timeframe = 26)
         @short_timeframe = short_timeframe
         @long_timeframe = long_timeframe
         @max_timeframe = [short_timeframe, long_timeframe].max
@@ -25,8 +24,13 @@ module Ta4cr
 
       def calculate(index)
         start = calculate_starting_index(index, max_timeframe)
-        return @series.call(index) unless start >= 0
-        @short_ema_indicator.get_value(index) - @long_ema_indicator.get_value(index)
+
+        return BigDecimal::ZERO unless start >= 0
+
+        short_value = @short_ema_indicator.get_value(index).as(BigDecimal)
+        long_value = @long_ema_indicator.get_value(index).as(BigDecimal)
+
+        short_value - long_value
       end
     end
   end
