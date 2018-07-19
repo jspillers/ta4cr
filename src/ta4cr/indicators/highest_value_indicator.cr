@@ -11,7 +11,7 @@ module Ta4cr
         @timeframe = timeframe
       end
 
-      def calculate(index)
+      protected def calculate(index)
         start = calculate_starting_index(index, timeframe)
 
         if indicator = @indicator.as(BaseIndicator) 

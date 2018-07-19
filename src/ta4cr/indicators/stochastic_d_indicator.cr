@@ -19,7 +19,7 @@ module Ta4cr
         @sma = SmaIndicator.new(indicator, timeframe)
       end
 
-      def calculate(index)
+      protected def calculate(index)
         start = calculate_starting_index(index, timeframe)
         return nil unless start >= 0
         @sma.get_value(index)

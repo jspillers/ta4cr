@@ -10,12 +10,12 @@ require "./base_indicator"
 module Ta4cr
   module Indicators
     class MacdHistogramIndicator < BaseIndicator
-      def initialize(macd_indicator : MacdIndicator, macd_signal_indicator : MacdIndicator, timeframe = 9)
+      def initialize(macd_indicator : MacdIndicator, macd_signal_indicator : MacdSignalIndicator, timeframe = 9)
         @macd = macd_signal_indicator
         @macd_signal = macd_signal_indicator
       end
 
-      def calculate(index)
+      protected def calculate(index)
         @macd.get_value(index).as(BigDecimal) - @macd_signal.get_value(index).as(BigDecimal)
       end
     end

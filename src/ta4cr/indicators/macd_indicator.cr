@@ -22,7 +22,7 @@ module Ta4cr
         @long_ema_indicator = EmaIndicator.new(indicator, long_timeframe)
       end
 
-      def calculate(index)
+      protected def calculate(index)
         start = calculate_starting_index(index, max_timeframe)
 
         return BigDecimal::ZERO unless start >= 0

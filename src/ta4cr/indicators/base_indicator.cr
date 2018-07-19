@@ -38,7 +38,7 @@ module Ta4cr
         index - (timeframe - 1)
       end
 
-      abstract def calculate(index : Int32)
+      protected abstract def calculate(index : Int32)
     end
   end
 end

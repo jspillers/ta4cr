@@ -14,7 +14,7 @@ module Ta4cr
         @signal_ema = EmaIndicator.new(macd_indicator, timeframe)
       end
 
-      def calculate(index)
+      protected def calculate(index)
         @signal_ema.get_value(index).as(BigDecimal)
       end
     end

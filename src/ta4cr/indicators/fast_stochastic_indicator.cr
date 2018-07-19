@@ -29,7 +29,7 @@ module Ta4cr
         @close_price_indicator = ClosePriceIndicator.new(series)
       end
 
-      def calculate(index)
+      protected def calculate(index)
         start = calculate_starting_index(index, timeframe)
 
         return BigDecimal.new(0) unless start >= 0

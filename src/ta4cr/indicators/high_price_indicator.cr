@@ -8,7 +8,7 @@ module Ta4cr
         @series = series
       end
 
-      def calculate(index)
+      protected def calculate(index)
         if series = @series
           bar = series[index] if series[index]?
           bar.responds_to?(:high) ? bar.try &.high : nil

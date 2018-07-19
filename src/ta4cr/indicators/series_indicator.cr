@@ -14,7 +14,7 @@ module Ta4cr
         @series = series.map {|item| BigDecimal.new(item) }
       end
 
-      def calculate(index)
+      protected def calculate(index)
         if series = @series
           series[index] 
         end

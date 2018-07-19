@@ -18,7 +18,7 @@ module Ta4cr
         @multiplier = BigDecimal.new(2.0 / (timeframe + 1))
       end
 
-      def calculate(index)
+      protected def calculate(index)
         start = calculate_starting_index(index, timeframe)
 
         if indicator = @indicator
