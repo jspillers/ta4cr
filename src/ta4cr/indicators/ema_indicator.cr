@@ -26,11 +26,12 @@ module Ta4cr
           
           return @sma_indicator.get_value(index) if start == 0
 
-          previous_avg = get_value(index - 1).as(BigDecimal)
-          indicator_value = indicator.get_value(index).as(BigDecimal)
+          previous_avg = get_value(index - 1)
+          indicator_value = indicator.get_value(index)
 
           if previous_avg && indicator_value
-            ((indicator_value - previous_avg) * @multiplier) + previous_avg
+            ((indicator_value.as(BigDecimal) - previous_avg.as(BigDecimal)) * 
+             @multiplier) + previous_avg.as(BigDecimal)
           end
         end
       end
