@@ -21,8 +21,12 @@ module Ta4cr
 
       protected def calculate(index)
         start = calculate_starting_index(index, timeframe)
+
         return nil unless start >= 0
-        @sma.get_value(index)
+
+        if stoch_d_value = @sma.get_value(index)
+          stoch_d_value.as(BigDecimal)
+        end
       end
     end
   end

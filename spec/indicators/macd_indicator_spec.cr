@@ -13,7 +13,9 @@ describe Ta4cr::Indicators::MacdIndicator do
 
   it "returns the correctly averaged value when the timeframe as been met" do
     (25..expected_macd_series.size - 1).each do |i|
-      macd.calculate(i).round(2).should eq(expected_macd_series[i])
+      if macd_value = macd.get_value(i)
+        macd_value.round(2).should eq(expected_macd_series[i])
+      end
     end
   end
 end

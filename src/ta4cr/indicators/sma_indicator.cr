@@ -19,7 +19,7 @@ module Ta4cr
           if start >= 0
             indicator.get_series_values(start, index).sum / timeframe
           else
-            indicator.get_value(index)
+            indicator.get_value(index).as(BigDecimal)
           end
         end
       end

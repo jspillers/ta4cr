@@ -34,12 +34,14 @@ module Ta4cr
 
         return BigDecimal.new(0) unless start >= 0
 
-        close_price = @close_price_indicator.get_value(index).as(BigDecimal)
-        lowest_low_in_timeframe = @lowest_value_indicator.get_value(index).as(BigDecimal)
-        highest_high_in_timeframe = @highest_value_indicator.get_value(index).as(BigDecimal)
+        close_price = @close_price_indicator.get_value(index)
+        lowest_low_in_timeframe = @lowest_value_indicator.get_value(index)
+        highest_high_in_timeframe = @highest_value_indicator.get_value(index)
 
-        (close_price - lowest_low_in_timeframe) / 
-          (highest_high_in_timeframe - lowest_low_in_timeframe) * 100
+        if close_price && lowest_low_in_timeframe && highest_high_in_timeframe
+          (close_price.as(BigDecimal) - lowest_low_in_timeframe.as(BigDecimal)) / 
+            (highest_high_in_timeframe.as(BigDecimal) - lowest_low_in_timeframe.as(BigDecimal)) * 100
+        end
       end
     end
   end

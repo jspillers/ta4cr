@@ -15,8 +15,8 @@ describe Ta4cr::Indicators::FastStochasticIndicator do
     results = [] of Float64 
 
     (13..stochastic_series_data.size - 1).each do |i|
-      result = fast_stochastic.calculate(i).to_f
-      results << result.round(2)
+      result = fast_stochastic.calculate(i)
+      results << result.round(2).to_f if result
     end
 
     results.should eq(stochastic_series_data[13..stochastic_series_data.size - 1].map &.[] 4)

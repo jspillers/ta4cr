@@ -16,7 +16,12 @@ module Ta4cr
       end
 
       protected def calculate(index)
-        @macd.get_value(index).as(BigDecimal) - @macd_signal.get_value(index).as(BigDecimal)
+        macd_value = @macd.get_value(index)
+        macd_signal_value = @macd_signal.get_value(index)
+
+        if macd_value && macd_signal_value
+          macd_value.as(BigDecimal) - macd_signal_value.as(BigDecimal)
+        end
       end
     end
   end
