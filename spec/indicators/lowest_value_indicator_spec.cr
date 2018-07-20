@@ -7,7 +7,7 @@ end
 describe Ta4cr::Indicators::LowestValueIndicator do
   it "returns the highest value within the specified timeframe" do
     expected_lv_series_data.each_with_index do |expected, i|
-      lvi.calculate(i).should eq(expected)
+      lvi.get_value(i).should eq(expected)
     end
   end
 end

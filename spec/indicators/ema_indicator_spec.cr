@@ -7,7 +7,7 @@ end
 describe Ta4cr::Indicators::EmaIndicator do
   it "does not average the series value when timeframe as not been met" do
     (0..8).each do |i|
-      ema.calculate(i).should eq(expected_ema_series[i])
+      ema.get_value(i).should eq(expected_ema_series[i])
     end
   end
 

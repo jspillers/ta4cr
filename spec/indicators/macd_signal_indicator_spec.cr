@@ -1,20 +1,21 @@
 require "../spec_helper"
 
-def macd
-  MacdIndicator.new(indicator: macd_series, short_timeframe: 12, long_timeframe: 26)
+def macd_signal
+  MacdSignalIndicator.new(
+    macd_indicator: MacdIndicator.new(indicator: macd_series))
 end
 
-describe Ta4cr::Indicators::MacdIndicator do
+describe Ta4cr::Indicators::MacdSignalIndicator do
   it "does not average the series value when timeframe as not been met" do
     (0..24).each do |i|
-      macd.get_value(i).should eq(expected_macd_series[i])
+      macd_signal.get_value(i).should eq(expected_macd_signal_series[i])
     end
   end
 
   it "returns the correctly averaged value when the timeframe as been met" do
-    (25..expected_macd_series.size - 1).each do |i|
-      if macd_value = macd.get_value(i)
-        macd_value.round(2).should eq(expected_macd_series[i])
+    (25..expected_macd_signal_series.size - 1).each do |i|
+      if macd_signal_value = macd_signal.get_value(i)
+        macd_signal_value.round(2).should eq(expected_macd_signal_series[i])
       end
     end
   end
@@ -28,9 +29,9 @@ def macd_series
   ])
 end
 
-def expected_macd_series
+def expected_macd_signal_series
   [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 7, 7, 7, 5.56, 4.3, 3.17,
+    0, 0, 0, 0, 0, 1.4, 2.52, 3.42, 3.85, 3.94, 3.78,
   ].map { |ss| BigDecimal.new(ss) }
 end

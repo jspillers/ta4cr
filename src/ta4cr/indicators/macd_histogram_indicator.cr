@@ -10,8 +10,8 @@ require "./base_indicator"
 module Ta4cr
   module Indicators
     class MacdHistogramIndicator < BaseIndicator
-      def initialize(macd_indicator : MacdIndicator, macd_signal_indicator : MacdSignalIndicator, timeframe = 9)
-        @macd = macd_signal_indicator
+      def initialize(macd_indicator : MacdIndicator, macd_signal_indicator : MacdSignalIndicator)
+        @macd = macd_indicator
         @macd_signal = macd_signal_indicator
       end
 

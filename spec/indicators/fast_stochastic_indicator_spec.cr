@@ -7,7 +7,7 @@ end
 describe Ta4cr::Indicators::FastStochasticIndicator do
   it "does not average the series value when timeframe as not been met" do
     (0..12).each do |i|
-      fast_stochastic.calculate(i).should eq(0.0)
+      fast_stochastic.get_value(i).should eq(0.0)
     end
   end
 
@@ -15,7 +15,7 @@ describe Ta4cr::Indicators::FastStochasticIndicator do
     results = [] of Float64 
 
     (13..stochastic_series_data.size - 1).each do |i|
-      result = fast_stochastic.calculate(i)
+      result = fast_stochastic.get_value(i)
       results << result.round(2).to_f if result
     end
 

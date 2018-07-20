@@ -7,7 +7,7 @@ end
 describe Ta4cr::Indicators::HighestValueIndicator do
   it "returns the highest value within the specified timeframe" do
     expected_hv_series_data.each_with_index do |expected, i|
-      hvi.calculate(i).should eq(expected)
+      hvi.get_value(i).should eq(expected)
     end
   end
 end
