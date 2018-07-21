@@ -20,7 +20,7 @@ module Ta4cr
         macd_signal_value = @macd_signal.get_value(index)
 
         if macd_value && macd_signal_value
-          macd_value.as(BigDecimal) - macd_signal_value.as(BigDecimal)
+          macd_value - macd_signal_value
         end
       end
     end

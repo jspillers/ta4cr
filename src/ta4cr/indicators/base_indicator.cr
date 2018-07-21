@@ -2,15 +2,15 @@ module Ta4cr
   module Indicators
     abstract class BaseIndicator
       @indicator : BaseIndicator | Nil
-      @series : OhlcSeries | Array(BigDecimal) | Nil
-      @calculations = {} of Int32 => BigDecimal | Nil
+      @series : OhlcSeries | Array(Float64) | Nil
+      @calculations = {} of Int32 => Float64 | Nil
 
       def initialize(indicator : BaseIndicator)
         @indicator = indicator
       end
 
       def initialize(series : Array(Float64))
-        @series = series.flat_map {|item| BigDecimal.new(item) }
+        @series = series
       end
 
       def initialize(series : OhlcSeries)
@@ -20,7 +20,7 @@ module Ta4cr
       def get_series_values(start, stop)
         (start..stop).map do |i|
           val = get_value(i)
-          val && val.is_a?(BigDecimal) ? val : nil
+          val && val.is_a?(Float64) ? val : nil
         end.compact
       end
 
@@ -29,7 +29,7 @@ module Ta4cr
 
         result = calculate(index)
 
-        if result.is_a?(BigDecimal)
+        if result.is_a?(Float64)
           @calculations[index] = result
         end
       end

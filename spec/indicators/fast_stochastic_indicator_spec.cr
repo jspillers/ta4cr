@@ -26,12 +26,7 @@ end
 def ohlc_series
   OhlcSeries.new.tap do |ohlc_series|
     stochastic_series_data.each do |data|
-      ohlc_series.add_bar(OhlcBar.new(
-        BigDecimal.new(data[2].as(Float64)), 
-        BigDecimal.new(data[0].as(Float64)), 
-        BigDecimal.new(data[1].as(Float64)), 
-        BigDecimal.new(data[3].as(Float64))
-      ))
+      ohlc_series.add_bar(OhlcBar.new(data[2], data[0], data[1], data[3]))
     end
   end
 end

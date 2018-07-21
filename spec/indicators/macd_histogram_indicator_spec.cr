@@ -40,5 +40,5 @@ def expected_macd_histogram_series
   [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     0, 0, 0, 0, 0, 5.6, 4.48, 3.58, 1.72, 0.36, -0.61,
-  ].map { |ss| BigDecimal.new(ss) }
+  ].map { |s| s.to_f64 }
 end

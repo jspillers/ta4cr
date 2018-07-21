@@ -24,9 +24,7 @@ module Ta4cr
 
         return nil unless start >= 0
 
-        if sma_value = @sma.get_value(index)
-          sma_value.as(BigDecimal)
-        end
+        @sma.get_value(index)
       end
     end
   end

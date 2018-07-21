@@ -24,9 +24,7 @@ module Ta4cr
 
         return nil unless start >= 0
 
-        if stoch_d_value = @sma.get_value(index)
-          stoch_d_value.as(BigDecimal)
-        end
+        @sma.get_value(index)
       end
     end
   end

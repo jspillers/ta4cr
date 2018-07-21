@@ -15,9 +15,7 @@ module Ta4cr
       end
 
       protected def calculate(index)
-        if value = @signal_ema.get_value(index)
-          value.as(BigDecimal)
-        end
+        @signal_ema.get_value(index)
       end
     end
   end

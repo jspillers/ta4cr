@@ -15,7 +15,7 @@ module Ta4cr
         start = calculate_starting_index(index, timeframe)
 
         if indicator = @indicator
-          indicator.get_series_values([0, start].max, index).min.as(BigDecimal)
+          indicator.get_series_values([0, start].max, index).try &.min
         end
       end
     end

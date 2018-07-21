@@ -32,15 +32,15 @@ module Ta4cr
       protected def calculate(index)
         start = calculate_starting_index(index, timeframe)
 
-        return BigDecimal.new(0) unless start >= 0
+        return 0.0 unless start >= 0
 
         close_price = @close_price_indicator.get_value(index)
         lowest_low_in_timeframe = @lowest_value_indicator.get_value(index)
         highest_high_in_timeframe = @highest_value_indicator.get_value(index)
 
         if close_price && lowest_low_in_timeframe && highest_high_in_timeframe
-          (close_price.as(BigDecimal) - lowest_low_in_timeframe.as(BigDecimal)) / 
-            (highest_high_in_timeframe.as(BigDecimal) - lowest_low_in_timeframe.as(BigDecimal)) * 100
+          (close_price - lowest_low_in_timeframe) / 
+            (highest_high_in_timeframe - lowest_low_in_timeframe) * 100
         end
       end
     end

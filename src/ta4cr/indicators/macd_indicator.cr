@@ -25,13 +25,13 @@ module Ta4cr
       protected def calculate(index)
         start = calculate_starting_index(index, max_timeframe)
 
-        return BigDecimal.new(0) unless start >= 0
+        return 0.0 unless start >= 0
 
         short_value = @short_ema_indicator.get_value(index)
         long_value = @long_ema_indicator.get_value(index)
 
         if short_value && long_value
-          short_value.as(BigDecimal) - long_value.as(BigDecimal)
+          short_value.to_f - long_value.to_f
         end
       end
     end
